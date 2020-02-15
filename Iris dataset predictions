@@ -1,0 +1,48 @@
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+import numpy as np
+
+# Loading the dataset
+dataset = load_iris()
+X = dataset["data"]
+Y = dataset["target"]
+d_index = int(len(X) * 0.55)
+
+# Shuffling the data by using numpy
+random = np.arange(len(X))
+np.random.shuffle(random)
+shuffle_x = X[random]
+shuffle_y = Y[random]
+
+# Training and Testing data
+train_x = shuffle_x[ : d_index]
+train_y = shuffle_y[ : d_index]
+test_x = shuffle_x[d_index : ] 
+test_y = shuffle_y[d_index : ]
+
+def model_prediction(algorithm,model):
+    model = model()
+    model.fit(train_x,train_y)
+    prediction = [int(i) for i in model.predict(test_x)]     # Converting the prediction into integer because the values of prediction are in float   
+
+    # Checking the accuracy of our model
+    match = 0
+    for i in range(len(test_y)):
+        if test_y[i] == prediction[i]:
+            match += 1
+
+    accuracy = int(match / len(test_y) * 100)
+    print(f"Accuracy of {algorithm} : {accuracy}%")
+
+
+model_prediction("DecisionTreeClassifier",DecisionTreeClassifier)
+model_prediction("LinearRegression",LinearRegression)
+model_prediction("LogisticRegression",LogisticRegression)
+model_prediction("GaussianNB",GaussianNB)
+model_prediction("RandomForestClassifier",RandomForestClassifier)
+model_prediction("SupportVectorClassifier",SVC)
+
