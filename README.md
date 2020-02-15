@@ -1,7 +1,7 @@
 # Iris Dataset Predictions
 The file named 'Iris Dataset Predictions' contained the code applied with iris_dataset.
 
-The code use 5 alogorithms to test and train model.The algorithms are --
+The code use 5 alogorithms to test and train model.The algorithms are --\n
         * DecisionTreeClassifier          * SVM             * LinearRegression                
         * RandomForestClassifier          * NaiveByes       * LogisticRegression
         
